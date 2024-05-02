@@ -1,4 +1,7 @@
 services:
+  app:
+    environment:
+      - DJANGO_SETTINGS_MODULE=djangobnb_backend.settings
   nginx:
     build: ./nginx
     ports:
