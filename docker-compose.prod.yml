@@ -1,7 +1,4 @@
-services:
-  app:
-    environment:
-      - DJANGO_SETTINGS_MODULE=djangobnb_backend.settings
+services: 
   nginx:
     build: ./nginx
     ports:
@@ -9,6 +6,8 @@ services:
     depends_on:
       - web
   web:
+    environment:
+      - DJANGO_SETTINGS_MODULE=djangobnb_backend.settings
     build: ./djangobnb_backend
     command: gunicorn djangobnb_backend.wsgi:application --bind 0.0.0.0:8000
     volumes:
@@ -21,6 +20,8 @@ services:
       - db
       - daphne
   daphne:
+    environment:
+      - DJANGO_SETTINGS_MODULE=djangobnb_backend.settings
     build: ./djangobnb_backend
     command: daphne --bind 0.0.0.0 -p 8002 djangobnb_backend.asgi:application
     ports:
